@@ -1,37 +1,99 @@
-## Welcome to GitHub Pages
+@import "bourbon";
 
-You can use the [editor on GitHub](https://github.com/ncdesigns/learning/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+// ------------ START Boring stuff
+@import url(https://fonts.googleapis.com/css?family=Lato);
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+$green: #2ea994;
 
-### Markdown
+body {
+  font-family: 'Lato', Arial, sans-serif;
+  background: #13171b;
+  color: white;
+  text-align: center;
+}
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+.h1 {
+    font-size: 30px;
+}
 
-```markdown
-Syntax highlighted code block
+// ------------ END Boring stuff
 
-# Header 1
-## Header 2
-### Header 3
+// ------------ START Fun stuff
 
-- Bulleted
-- List
+.skills {
+  list-style: none;
+  font-size: 20px;
+  padding: 0;
+  .skill {
+    display: block;
+			    position: relative; // For positioning bar pseudo elements
+			    height: 60px;
+			    margin: 10px auto;
+    width: 90%;
+    @media only screen and (min-width: 900px) {
+      display: inline-block;
+			      width: percentage(1/4);
+      margin: 10px;
+    }
+    &:before,
+    &:after {
+      content: "";
+      position: absolute;
+      border-radius: 20px;
+      margin-top: 40px;
+    }
+    &:before {
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      height: 20px;
+      background: #eeeeee;
+    }
+    &:after {
+      background-color: $green;
+      background: repeating-linear-gradient(-45deg, $green, $green 10px, lighten($green, 3) 10px, lighten($green, 3) 20px);
+      height: 16px; 
+      top: 2px;
+      right: 95%;
+      bottom: 2px;
+      left: 2px;
+      @include animation(fill 2s both);
+    }
+    @for $i from 1 through 5 {
+      					&:nth-child(#{$i}):after {
+          @include animation-delay(#{$i * 0.5}s);
+      }
+				    }
+    &[aria-label="novice"]:after {
+      right: 75%;
+    }
+    &[aria-label="average"]:after {
+      right: 50%;
+    }
+    &[aria-label="adept"]:after {
+      right: 35%;
+    }
+    &[aria-label="advanced"]:after {
+      right: 20%;
+    }
+    &[aria-label="elite"]:after {
+      right: 10%;
+    }
+    &[aria-label="pro"]:after {
+      right: 2px;
+    }
+    &[aria-label="l33tasuar"]:after {
+      // turn it up to 11!
+      right: -10%;
+    }
+  }
+}
 
-1. Numbered
-2. List
+@include keyframes(fill) {
+  from {
+    right: 100%;
+  }
+}
 
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/ncdesigns/learning/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+// ------------ END Fun stuff
